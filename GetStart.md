@@ -1,5 +1,7 @@
 # ReactReview using an application
+
 ## Geting started
+
 ### Two kinds of applications
 - #### single page Applications
    - #### Only one Html page, Content is (re)rendered on Client
