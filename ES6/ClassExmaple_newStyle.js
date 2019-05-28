@@ -4,7 +4,8 @@ class Human{
   // printGender(){
   //   console.log(this.gender);
   // }
-  printGender= () => {
+  printGender = () => { 
+    // it still work with or without arrow function (no closure issue needs to be concerned)
     console.log(this.gender);
   }
 } 
