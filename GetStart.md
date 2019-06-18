@@ -51,3 +51,8 @@ const doubleNumArray = numbers.map(num => {return num*2})
 //const doubleNumArray = numbers.map(num => num*2)
 console.log(doubleNumArray)
 ```
+## How to start an react app
+- downlode the node.js from its websites.
+- Mac install npm: `sudo npm install create-react-app -g`, 必须有sudo, 否则会有permission denied.
+- create-react-app the <-itsName->
+- cd to the address, then `npm start`
