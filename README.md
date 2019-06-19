@@ -56,3 +56,30 @@ console.log(doubleNumArray)
 - Mac install npm: `sudo npm install create-react-app -g`, 必须有sudo, 否则会有permission denied.
 - create-react-app the <-itsName->
 - cd to the address, then `npm start`
+## JSX restriction
+wrap all element in a single element 
+```JSX
+class App extends Component {
+  render() {
+    return (
+      <div className="App"> //one <></> wraped.
+      <p> Hi, I'm a react app </p>
+      </div>   
+    );
+  }
+}
+```
+## Components
+`import React, {Component} from 'react';`
+- For each component, the name needed to be writen using lower case.
+- Both the document name and the name that imported in other document need to be capitalized.
+```JSX
+import React from 'react';
+const person = () => {
+  return <p>I'm a person!</p>
+}
+export default person;
+``` 
+```jsx
+import Person from './Person/Person';
+```
