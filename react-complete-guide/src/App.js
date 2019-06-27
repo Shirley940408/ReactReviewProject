@@ -9,11 +9,24 @@ class App extends Component {
       { name: 'Stephanie', age: 26},
     ]
   }
+  switchNameHandler = () => {
+    // console.log("clicked");
+    this.setState(
+      {
+        persons: [
+          { name: 'Max', age: 28},
+          { name: 'MM', age: 26},
+          { name: 'Stephanie', age: 26},
+        ]
+      }
+    )
+  }
   render() {
     const { persons } = this.state;
     return (
       <div className="App">
       <p>Hi, I'm a react app</p>
+      <button onClick = {this.switchNameHandler}>Switch Name</button>
       {
         // for(i = 0; i < persons.length; i++){
         //   return <Person name={persons[i].name} age={person[i].age}/>

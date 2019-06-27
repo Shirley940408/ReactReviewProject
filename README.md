@@ -83,3 +83,69 @@ export default person;
 ```jsx
 import Person from './Person/Person';
 ```
+## dynamic props
+### When you need js function in a JSX, using `{}` inside it.
+```JSX
+import React from 'react';
+const person = (props) => {
+  return <p>I'm a {props.name} and I am {props.age} years old! {props.children}</p>
+}
+
+export default person;
+```
+## dynamic parameters
+```JSX
+
+import React, { Component } from 'react';
+import './App.css';
+import Person from './Person/Person';
+class App extends Component {
+  state = {
+    persons: [
+      { name: 'Max', age: 28},
+      { name: 'Manu', age: 29},
+      { name: 'Stephanie', age: 26},
+    ]
+  }
+  switchNameHandler = () => {
+    console.log("clicked");
+  }
+  render() {
+    const { persons } = this.state;
+    return (
+      <div className="App">
+      <p>Hi, I'm a react app</p>
+      <button onClick = {this.switchNameHandler}>Switch Name</button>
+      {
+        // for(i = 0; i < persons.length; i++){
+        //   return <Person name={persons[i].name} age={person[i].age}/>
+        // }
+        // you cannot write for loop in JSX like above. The effective way to use loop is using map:
+
+        persons.map((value) => {
+          return <Person key={value.name} name={value.name} age={value.age}/>
+        })
+      }     
+      </div>   
+    );
+  }
+}
+
+export default App;
+```
+#### 什么情况可以使用for循环： for loop 在最外层， 即不能使用某个标签里面套for循环再套标签。
+### this.setState() and props change are the only two options those could lead react update the DOM.
+```JSX
+switchNameHandler = () => {
+    // function could work e.g. after onClicked
+    this.setState(
+      {
+        persons: [
+          { name: 'Max', age: 28},
+          { name: 'MM', age: 26},
+          { name: 'Stephanie', age: 26},
+        ]
+      }
+    )
+  }
+```
