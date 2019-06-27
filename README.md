@@ -149,3 +149,51 @@ switchNameHandler = () => {
     )
   }
 ```
+
+### Use function components as much as possible, use Class components only when it must have a state.
+
+### The way that children components would like to change the parent components.
+```JSX
+// First, put the reference of method into the props of chirdren
+// second write the call function in the childern components
+
+  render() {
+    const { persons } = this.state;
+    return (
+      <div className="App">
+      <p>Hi, I'm a react app</p>
+      <button onClick = {() => this.switchNameHandler('Amy', 27)}>Switch Name</button>
+      {
+        // for(i = 0; i < persons.length; i++){
+        //   return <Person name={persons[i].name} age={person[i].age}/>
+        // }
+        // you cannot write for loop in JSX like above. The effective way to use loop is using map:
+
+        persons.map((value) => {
+          return <Person 
+                  key={value.name} 
+                  name={value.name} 
+                  age={value.age}
+                  click = {this.switchNameHandler.bind(this,'Sara', 25)}
+                  />
+        })
+      }     
+      </div>   
+    );
+```
+### Two ways that parameters could be passed.
+- ##### call back function
+```JSX
+<button onClick = {() => this.switchNameHandler('Amy', 27)}>Switch Name</button>
+```
+- ##### function.bind(this, parameter1, parameter2,...)
+```JSX
+persons.map((value) => {
+  return <Person 
+          key={value.name} 
+          name={value.name} 
+          age={value.age}
+          click = {this.switchNameHandler.bind(this,'Sara', 25)}
+          />
+})
+```
