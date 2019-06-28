@@ -21,6 +21,15 @@ class App extends Component {
       }
     )
   }
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        { name: 'Max', age: 27},
+        { name: event.target.value, age: 26},
+        { name: 'Stephanie', age: 26},
+      ]
+    })
+  }
   render() {
     const { persons } = this.state;
     return (
@@ -33,15 +42,16 @@ class App extends Component {
         // }
         // you cannot write for loop in JSX like above. The effective way to use loop is using map:
 
-        persons.map((value) => {
-          return <Person 
-                  key={value.name} 
-                  name={value.name} 
-                  age={value.age}
+        persons.map((val,index) => {
+          return (<Person 
+                  key = {index}
+                  name = {val.name} 
+                  age = {val.age}
                   click = {this.switchNameHandler.bind(this,'Sara', 25)}
-                  />
+                  changed = {this.nameChangedHandler}
+                  />)
         })
-      }     
+      } 
       </div>   
     );
   }
