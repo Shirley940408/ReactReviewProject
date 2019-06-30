@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment } from 'react';
 import './App.css';
 import Person from './Person/Person';
 class App extends Component {
@@ -7,7 +7,8 @@ class App extends Component {
       { name: 'Max', age: 28},
       { name: 'Manu', age: 29},
       { name: 'Stephanie', age: 26},
-    ]
+    ],
+    showPersons: false,
   }
   switchNameHandler = (newName, newAge) => {
     // console.log("clicked");
@@ -30,11 +31,16 @@ class App extends Component {
       ]
     })
   }
+  togglePersonsHandler = () => {
+    const showPersons = this.state.showPersons;
+    this.setState({showPersons: !showPersons})
+    console.log(this.state.showPersons);
+  }
   render() {
     const style = {
       backgroundColor : 'white',
       font: 'inherit',
-      border:'1px solid blue',
+      border:'1pgx solid blue',
       padding:'8px',
       cursor:'pointer',
     };
@@ -42,23 +48,20 @@ class App extends Component {
     return (
       <div className="App">
       <p>Hi, I'm a react app</p>
-      <button style={style} onClick = {() => this.switchNameHandler('Amy', 27)}>Switch Name</button>
-      {
-        // for(i = 0; i < persons.length; i++){
-        //   return <Person name={persons[i].name} age={person[i].age}/>
-        // }
-        // you cannot write for loop in JSX like above. The effective way to use loop is using map:
-
-        persons.map((val,index) => {
-          return (<Person 
-                  key = {index}
-                  name = {val.name} 
-                  age = {val.age}
-                  click = {this.switchNameHandler.bind(this,'Sara', 25)}
-                  changed = {this.nameChangedHandler}
-                  />)
-        })
-      } 
+      <button style={style} onClick = {this.togglePersonsHandler}>Switch Name</button> 
+      { this.state.showPersons == true?   
+        persons.map((val,index) => {    
+        return (
+          <Person 
+          key = {index}
+          name = {val.name} 
+          age = {val.age}
+          click = {this.switchNameHandler.bind(this,'Sara', 25)}
+          changed = {this.nameChangedHandler}
+          /> 
+        )    
+        }): null         
+      }  
       </div>   
     );
   }
