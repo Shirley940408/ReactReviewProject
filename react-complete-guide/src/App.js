@@ -44,23 +44,32 @@ class App extends Component {
       padding:'8px',
       cursor:'pointer',
     };
+    let showPersons = null;
     const { persons } = this.state;
+    if(this.state.showPersons){
+      showPersons = (
+        persons.map((val,index) => {    
+          return (
+            <Person 
+            key = {index}
+            name = {val.name} 
+            age = {val.age}
+            click = {this.switchNameHandler.bind(this,'Sara', 25)}
+            changed = {this.nameChangedHandler}
+            /> 
+          )    
+          })
+      );
+    }
+    
     return (
       <div className="App">
       <p>Hi, I'm a react app</p>
       <button style={style} onClick = {this.togglePersonsHandler}>Switch Name</button> 
-      { this.state.showPersons == true?   
-        persons.map((val,index) => {    
-        return (
-          <Person 
-          key = {index}
-          name = {val.name} 
-          age = {val.age}
-          click = {this.switchNameHandler.bind(this,'Sara', 25)}
-          changed = {this.nameChangedHandler}
-          /> 
-        )    
-        }): null         
+       { 
+        // this.state.showPersons == true?   
+        showPersons
+        // : null         
       }  
       </div>   
     );
