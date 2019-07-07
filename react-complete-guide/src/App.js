@@ -1,5 +1,6 @@
 import React, { Component,Fragment } from 'react';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 class App extends Component {
   state = {
@@ -56,6 +57,10 @@ class App extends Component {
       border:'1pgx solid blue',
       padding:'8px',
       cursor:'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color:'black',
+      }
     };
     let showPersons = null;
     const { persons } = this.state;
@@ -75,6 +80,10 @@ class App extends Component {
         })
       );
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color:'black'
+      }
     }
 
     return (
@@ -91,4 +100,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
