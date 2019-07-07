@@ -74,6 +74,7 @@ class App extends Component {
           )    
         })
       );
+      style.backgroundColor = 'red';
     }
 
     return (
@@ -84,7 +85,7 @@ class App extends Component {
         // this.state.showPersons == true?   
         showPersons
         // : null         
-      }  
+       }  
       </div>   
     );
   }
