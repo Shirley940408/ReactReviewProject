@@ -197,3 +197,50 @@ persons.map((value) => {
           />
 })
 ```
+### Resopnsable Layout
+#### When using in .css files
+```css
+@media(min-width: 500px){
+  .Person{
+    width: 450px;
+  }
+}
+```
+#### using in .js files
+```jsx
+//using in components
+const person = (props) => {
+  const styles = {
+    '@media(min-width: 500px)': {
+      width: '450px'
+    }
+  };
+  return (
+    <div className = 'Person' style={styles}>
+      <p onClick = {props.click}>I'm a {props.name} and I am {props.age} years old! {props.children}
+      </p>
+      <input type="text" onChange = {props.changed} value = {props.name}/>
+    </div>
+  ); 
+}
+
+export default Radium(person);
+
+//using these components above by wraping <StyleRoot></StyleRoot> in App.js
+
+import Radium, { Styleroot } from 'radium';
+//...
+    return (
+      <StyleRoot>
+      <div className="App">
+      <p>Hi, I'm a react app</p>
+      <button style={style} onClick = {this.togglePersonsHandler}>Switch Name</button> 
+       { 
+        // this.state.showPersons == true?   
+        showPersons
+        // : null         
+       }  
+      </div> 
+      </StyleRoot>  
+    );
+```
