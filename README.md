@@ -247,3 +247,47 @@ import Radium, { Styleroot } from 'radium';
 ```
 ### How to add a Sass Stylesheet -- A simple way to avoid naming problem
 [Adding a Sass Stylesheet · Create React App](https://facebook.github.io/create-react-app/docs/adding-a-sass-stylesheet)
+### Error Control
+#### You can use another component to handle this, then import it to App return stage as a higher rank component. But only do this when you know there is a step could cause errors those cannot avoid. Otherwise it will catch all the errors in the develop process.
+```JSX
+  import React, {Component} from 'react';
+
+class ErrorBoundary extends Component {
+  state = {
+    hasError: false,
+    errorMessage: ''
+  }
+
+  componentDidCatch = (error, info) => {
+    this.setState({hasError: true, errorMessage: error});
+  }
+  
+  render(){
+    if (this.state.hasError){
+      return <h1>{this.state.errorMessage}</h1>
+    }else{
+      return this.props.children;
+    }
+  }
+}
+
+export default ErrorBoundary;
+
+//App.js
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+//...
+
+    return (
+      <ErrorBoundary>
+      <div className={styles.App}>
+      <p>Hi, I'm a react app</p>
+      <button className={btnClass} onClick = {this.togglePersonsHandler}>Switch Name</button> 
+       { 
+        // this.state.showPersons == true?   
+        showPersons
+        // : null         
+       }  
+      </div> 
+      </ErrorBoundary>
+    );
+```

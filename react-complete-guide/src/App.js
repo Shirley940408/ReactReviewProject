@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from'./App.module.scss';
 // import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 class App extends Component {
   state = {
     persons: [
@@ -87,7 +88,7 @@ class App extends Component {
     }
 
     return (
-      // <StyleRoot>
+      <ErrorBoundary>
       <div className={styles.App}>
       <p>Hi, I'm a react app</p>
       <button className={btnClass} onClick = {this.togglePersonsHandler}>Switch Name</button> 
@@ -97,7 +98,7 @@ class App extends Component {
         // : null         
        }  
       </div> 
-      // </StyleRoot>  
+      </ErrorBoundary>
     );
   }
 }
