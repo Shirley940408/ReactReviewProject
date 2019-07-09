@@ -244,7 +244,7 @@ import Radium, { Styleroot } from 'radium';
       </StyleRoot>  
     );
 ```
-```
+
 ### How to add a Sass Stylesheet -- A simple way to avoid naming problem
 [Adding a Sass Stylesheet · Create React App](https://facebook.github.io/create-react-app/docs/adding-a-sass-stylesheet)
 ### Error Control
