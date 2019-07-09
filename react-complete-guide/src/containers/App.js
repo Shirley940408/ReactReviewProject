@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import styles from'./App.module.scss';
 // import Radium, { StyleRoot } from 'radium';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+
+// import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Cockpit from '../components/Cockpit/Cockpit';
 class App extends Component {
   state = {
     persons: [
@@ -68,37 +71,33 @@ class App extends Component {
     let btnClass = styles.button;
     if(this.state.showPersons){
       showPersons = (
-        persons.map((val,index) => {    
-          return (
-            <Person 
-            key = {val.id}
-            name = {val.name} 
-            age = {val.age}
-            click = {() => {this.deletePerson(index)}}
-            changed = {(e) => {this.nameChangedHandler(e, val.id)}}
-            /> 
-          )    
-        })
+        <Persons
+          persons = {this.state.persons}
+          clicked = {this.deletePerson}
+          changed = {this.nameChangedHandler}
+        />
       );
       // style[':hover'] = {
       //   backgroundColor: 'salmon',
       //   color:'black'
       // }
-      btnClass = styles.buttonClicked;
     }
 
     return (
-      <ErrorBoundary>
+      // <ErrorBoundary>
       <div className={styles.App}>
-      <p>Hi, I'm a react app</p>
-      <button className={btnClass} onClick = {this.togglePersonsHandler}>Switch Name</button> 
+        <Cockpit 
+        showPersons = {this.state.showPersons}
+        // persons = {this.state.persons}
+        clicked = {this.togglePersonsHandler}
+        />
        { 
         // this.state.showPersons == true?   
         showPersons
         // : null         
        }  
       </div> 
-      </ErrorBoundary>
+      // </ErrorBoundary>
     );
   }
 }
