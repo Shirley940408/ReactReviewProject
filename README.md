@@ -294,3 +294,13 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
       </ErrorBoundary>
     );
 ```
+### Class-based vs Functional Components
+
+| class-based | Functional |
+|-------------|------------|
+|class XY extends Component| const XY = props =>{...}|
+|Access to State| Access to State(useState())|
+|lifecycle Hooks| / |
+|Access State and Props through "this" | Access Props through "props" |
+|this.state.XY & this.props.XY| props.XY |
+| Use if you need to manage State or access to Lifecycle Hooks and you don't want to use React Hooks!| Use in all other Case |
