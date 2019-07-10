@@ -7,6 +7,10 @@ import Persons from '../components/Persons/Persons';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Cockpit from '../components/Cockpit/Cockpit';
 class App extends Component {
+  constructor(props){
+    super(props);
+    console.log('[App.js] constructor');
+  }
   state = {
     persons: [
       {id:'ai', name: 'Max', age: 28},
@@ -14,6 +18,17 @@ class App extends Component {
       {id:'ai23', name: 'Stephanie', age: 26},
     ],
     showPersons: false,
+  }
+  static getDerivedStateFromProps(props, state){
+    console.log('[App.js] getDrivedStateFromProps', props);
+    return state;
+  }
+  componentWillMount(){
+    //rarely used, it will be removed in the future
+    console.log('[App.js] componentWillMount')
+  }
+  componentDidMount(){
+    console.log('[App.js] componentDidMount');
   }
   switchNameHandler = (newName, newAge) => {
     // console.log("clicked");
@@ -55,6 +70,7 @@ class App extends Component {
     this.setState({persons: persons})
   }
   render() {
+    console.log('[App.js] render');
     // const style = {
     //   backgroundColor : 'white',
     //   font: 'inherit',
