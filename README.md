@@ -304,3 +304,9 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 |Access State and Props through "this" | Access Props through "props" |
 |this.state.XY & this.props.XY| props.XY |
 | Use if you need to manage State or access to Lifecycle Hooks and you don't want to use React Hooks!| Use in all other Case |
+
+### Component Lifecycle - Creation
+
+##### What is Side-Effects: In the end it means like sending a http request or storing something in your local storage of the browser or sending some analytics to Google analytics. The reason that calling it side-effect is it would impact performance and cause unnecessary re-render cycles which of course are pretty bad and you want to avoid.
+
+![Component Lifecycle](./images/ComponentLifecycle.png)
