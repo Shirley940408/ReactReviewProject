@@ -7,7 +7,7 @@ const cockpit = (props) => {
   }
   return (
     <div>
-    <p>Hi, I'm a react app</p>
+    <p>{props.title}</p>
     <button className={btnClass} onClick = {props.clicked}>Switch Name</button> 
     </div>
   );
