@@ -314,4 +314,4 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 ### Lifecycle Update
 
-![Lifecycle Update](./images/Lifecycle Update.png)
+![Lifecycle Update](./images/LifecycleUpdate.png)

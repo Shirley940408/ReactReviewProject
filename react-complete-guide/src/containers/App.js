@@ -19,10 +19,10 @@ class App extends Component {
     ],
     showPersons: false,
   }
-  static getDerivedStateFromProps(props, state){
-    console.log('[App.js] getDrivedStateFromProps', props);
-    return state;
-  }
+  // static getDerivedStateFromProps(props, state){
+  //   console.log('[App.js] getDrivedStateFromProps', props);
+  //   return state;
+  // }
   componentWillMount(){
     //rarely used, it will be removed in the future
     console.log('[App.js] componentWillMount')
