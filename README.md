@@ -310,3 +310,8 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 ##### What is Side-Effects: In the end it means like sending a http request or storing something in your local storage of the browser or sending some analytics to Google analytics. The reason that calling it side-effect is it would impact performance and cause unnecessary re-render cycles which of course are pretty bad and you want to avoid.
 
 ![Component Lifecycle](./images/ComponentLifecycle.png)
+
+
+### Lifecycle Update
+
+![Lifecycle Update](./images/Lifecycle Update.png)
