@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from'./Cockpit.module.scss';
-const cockpit = (props) => {
+const Cockpit = (props) => {
+  useEffect(() => {
+    // must inside a function
+    console.log('[Cockpit.js] useEfect')
+    // faked http request...
+    setTimeout(() => {
+      alert('Saved data to cloud!')
+    }, 1000)
+  }, [props.persons]);
+  
   let btnClass = styles.button;
   if(props.showPersons){
     btnClass = styles.buttonClicked;
@@ -12,4 +21,4 @@ const cockpit = (props) => {
     </div>
   );
 }
-export default cockpit;
+export default Cockpit;

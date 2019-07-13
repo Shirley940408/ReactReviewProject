@@ -315,3 +315,20 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 ### Lifecycle Update
 
 ![Lifecycle Update](./images/LifecycleUpdate.png)
+
+### Function Components Hooks 
+#### useEffect() : 
+- Must use an inside function
+- It could be considered as the combination of componentDidMount and componetDidUpdate when there is no second parameters `[...]` behind the () => {}
+- Inside of this `[]` means that the condition when this effect need to be triggered. If you leave an empty `[]`, it will be triggerd when it initialized, but it won't reload later.  
+- 
+```JSX
+  useEffect(() => {
+    // must inside a function
+    console.log('[Cockpit.js] useEfect')
+    // faked http request...
+    setTimeout(() => {
+      alert('Saved data to cloud!')
+    }, 1000)
+  }, [props.persons]);
+```

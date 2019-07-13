@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import Radium from 'radium';
 import styleModule from './Person.module.css';
 class Person extends Component {
-  render(){
+  render(){ 
     return (
       <div className = {styleModule.Person}>
         <p onClick = {this.props.click}>
