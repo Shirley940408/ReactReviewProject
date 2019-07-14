@@ -18,6 +18,7 @@ class App extends Component {
       {id:'ai23', name: 'Stephanie', age: 26},
     ],
     showPersons: false,
+    showCockpit: true,
   }
   // static getDerivedStateFromProps(props, state){
   //   console.log('[App.js] getDrivedStateFromProps', props);
@@ -70,7 +71,8 @@ class App extends Component {
     this.setState({persons: persons})
   }
   render() {
-    console.log('[App.js] render');
+    console.log('[App.js] render')
+    console.log(this.state.showCockpit)
     // const style = {
     //   backgroundColor : 'white',
     //   font: 'inherit',
@@ -102,17 +104,27 @@ class App extends Component {
     return (
       // <ErrorBoundary>
       <div className={styles.App}>
-        <Cockpit 
-        title = {this.props.appTitle}
-        showPersons = {this.state.showPersons}
-        // persons = {this.state.persons}
-        clicked = {this.togglePersonsHandler}
-        />
-       { 
-        // this.state.showPersons == true?   
-        showPersons
-        // : null         
-       }  
+      <button 
+        onClick = {() => {
+          this.setState({showCockpit: false})
+        }}
+      >
+        Remove Cockpit
+      </button>
+        {
+          this.state.showCockpit == true ?
+            <Cockpit 
+            title = {this.props.appTitle}
+            showPersons = {this.state.showPersons}
+            // persons = {this.state.persons}
+            clicked = {this.togglePersonsHandler}
+            /> : null
+        }
+        { 
+          // this.state.showPersons == true?   
+          showPersons
+          // : null         
+        }  
       </div> 
       // </ErrorBoundary>
     );
