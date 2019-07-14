@@ -330,10 +330,34 @@ componentWillUnmount(){
 ```JSX
   useEffect(() => {
     // must inside a function
-    console.log('[Cockpit.js] useEffect')
+    console.log('[Cockpit.js] useEfect')
     // faked http request...
     setTimeout(() => {
       alert('Saved data to cloud!')
     }, 1000)
   }, [props.persons]);
+```
+- return in useEffect(): run this when the the function has loaded in the last time
+```jsx
+  useEffect(() => {
+    // must inside a function
+    console.log('[Cockpit.js] useEfect')
+    // faked http request...
+    setTimeout(() => {
+      alert('Saved data to cloud!')
+    }, 1000)
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect')
+    }
+  }, []);
+
+```
+- If you leave the second parameter after the call back function empty, then it would load the content in the return every time , cause react does not know which time is the last one.
+```jsx
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect')
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect')
+    }
+  })
 ```
