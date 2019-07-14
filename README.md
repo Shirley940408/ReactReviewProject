@@ -320,6 +320,15 @@ componentWillUnmount(){
     console.log('Persons.js will unmount')
     //The lifecycle that you use to effect something before the component unmount.
   }
+shouldComponentUpdate(nextProps, nextState){
+  console.log('[Persons.js] shouldComponentUpdate')
+  if(nextProps.persons !== this.props.persons){
+    return true
+  } else {
+    return false
+  }
+  //this component must return a boolean value, if you like to update the component , return true; else return false.
+}
 ```
 ### Function Components Hooks 
 #### useEffect() : 
