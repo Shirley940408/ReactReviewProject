@@ -375,3 +375,4 @@ shouldComponentUpdate(nextProps, nextState){
 ```jsx
 export default React.memeo(Cockpit);
 ```
+#### Attention points: If your components should be updated after the parents components updated, then you do not need to add shouldComponentUpdate or React.memo(), otherwise you are just waste the loading time.
