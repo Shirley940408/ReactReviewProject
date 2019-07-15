@@ -370,3 +370,8 @@ shouldComponentUpdate(nextProps, nextState){
     }
   })
 ```
+### How to pervent the unnecessary re-render of function based components -- use React.memo()
+#### It matches the shouldComponentUpdate(nextProps, nextState) in Class based components.
+```jsx
+export default React.memeo(Cockpit);
+```

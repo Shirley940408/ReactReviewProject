@@ -26,9 +26,9 @@ const Cockpit = (props) => {
   }
   return (
     <div>
-    <p>{props.title}</p>
-    <button className={btnClass} onClick = {props.clicked}>Switch Name</button> 
+      <p>{props.title}</p>
+      <button className={btnClass} onClick = {props.clicked}>Switch Name</button> 
     </div>
   );
 }
-export default Cockpit;
+export default React.memeo(Cockpit);

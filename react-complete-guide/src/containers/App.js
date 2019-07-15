@@ -60,7 +60,7 @@ class App extends Component {
   togglePersonsHandler = () => {
     const showPersons = this.state.showPersons;
     this.setState({showPersons: !showPersons})
-    console.log(this.state.showPersons);
+    // console.log(this.state.showPersons);
   }
       
   deletePerson = (personIndex) => {
