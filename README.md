@@ -384,3 +384,26 @@ class Persons extends PureComponent {
 }
 ```
 #### It will manage the shouldComponentUpdate for you automaticly
+
+## How React Updates The DOM
+
+![How React update Dom](./images/updateDom.png)
+### Rendering Adjacent JSX Elements
+
+##### React does not allow to have two or more element, but it allows to return array, and it need to be initialized a unique key.
+```jsx
+render(){
+    console.log('[Persons.js] rendering...');   
+    return this.props.persons.map((val,index) => {   
+      return (
+        <Person 
+        key = {val.id}
+        name = {val.name} 
+        age = {val.age}
+        click = {() => {this.props.clicked(index)}}
+        changed = {(e) => {this.props.changed(e, val.id)}}
+        /> 
+      )    
+    })
+  }
+```
