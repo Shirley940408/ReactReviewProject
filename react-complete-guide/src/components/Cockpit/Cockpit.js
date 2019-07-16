@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import styles from'./Cockpit.module.scss';
 const Cockpit = (props) => {
   useEffect(() => {
@@ -27,8 +27,9 @@ const Cockpit = (props) => {
   return (
     <div>
       <p>{props.title}</p>
+
       <button className={btnClass} onClick = {props.clicked}>Switch Name</button> 
     </div>
   );
 }
-export default React.memeo(Cockpit);
+export default React.memo(Cockpit);
