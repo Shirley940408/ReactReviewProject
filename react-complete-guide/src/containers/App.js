@@ -6,6 +6,7 @@ import Persons from '../components/Persons/Persons';
 
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 class App extends Component {
   constructor(props){
     super(props);
@@ -102,8 +103,7 @@ class App extends Component {
     }
 
     return (
-      // <ErrorBoundary>
-      <div className={styles.App}>
+      <WithClass classes={styles.App}>
       <button 
         onClick = {() => {
           this.setState({showCockpit: false})
@@ -125,8 +125,7 @@ class App extends Component {
           showPersons
           // : null         
         }  
-      </div> 
-      // </ErrorBoundary>
+      </WithClass> 
     );
   }
 }
