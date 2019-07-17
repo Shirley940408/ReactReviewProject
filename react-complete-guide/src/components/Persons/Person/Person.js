@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import Radium from 'radium';
+import PropTypes from 'prop-types';
 import styleModule from './Person.module.scss';
 import withClass from '../../../hoc/withClass';
 class Person extends Component {
@@ -13,6 +14,13 @@ class Person extends Component {
       </div>
     ); 
   }
+}
+
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func,
 }
 
 export default withClass(Person, styleModule.Person);
