@@ -464,5 +464,26 @@ export default withClass;
 export default withClass(App, styles.App);
 ```
 #### Attention points
+
 - 如果你想用高阶组件的话，传入的component中的props一定要记得解构，不然全都拿不到。。。
 - 凡是return function的情况 return的function里面也要记得return
+
+### When updating a state depends on its previous state
+#### A bad way has given below...
+```jsx
+this.setState({
+    persons: persons,
+    changeCounter: this.state.changeCounter + 1,
+    //It might still work when the only component calling this, but it actually cannot garantee the sequence, it would cause error when the situation become more complicate.
+})
+```
+#### A good way to solve this
+```jsx
+// A good way to solve this
+this.setState((prevState, props) => {
+  return {
+    persons: persons,
+    changeCounter: prevState.changeCounter + 1,
+  }
+})
+```

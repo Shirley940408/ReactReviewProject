@@ -18,6 +18,7 @@ class App extends Component {
     ],
     showPersons: false,
     showCockpit: true,
+    changeCounter: 0,
   }
   // static getDerivedStateFromProps(props, state){
   //   console.log('[App.js] getDrivedStateFromProps', props);
@@ -30,18 +31,6 @@ class App extends Component {
   componentDidMount(){
     console.log('[App.js] componentDidMount');
   }
-  switchNameHandler = (newName, newAge) => {
-    // console.log("clicked");
-    this.setState(
-      {
-        persons: [
-          { name: newName, age: newAge},
-          { name: 'MM', age: 26},
-          { name: 'Stephanie', age: 26},
-        ]
-      }
-    )
-  }
 
   nameChangedHandler = (e, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -51,8 +40,11 @@ class App extends Component {
     person.name = e.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({
-     persons: persons,
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1,
+      }
     })
   }
 
