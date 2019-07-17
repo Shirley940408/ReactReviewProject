@@ -3,10 +3,8 @@ import styles from'./App.module.scss';
 // import Radium, { StyleRoot } from 'radium';
 import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
-
-// import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
 class App extends Component {
   constructor(props){
     super(props);
@@ -101,33 +99,28 @@ class App extends Component {
       //   color:'black'
       // }
     }
-
     return (
-      <WithClass classes={styles.App}>
-      <button 
-        onClick = {() => {
-          this.setState({showCockpit: false})
-        }}
-      >
+      <div>
+        <button 
+          onClick = {() => {
+            this.setState({showCockpit: false})
+          }}
+        >
         Remove Cockpit
-      </button>
+        </button>
         {
-          this.state.showCockpit == true ?
+          this.state.showCockpit === true ?
             <Cockpit 
-            title = {this.props.appTitle}
-            showPersons = {this.state.showPersons}
-            // persons = {this.state.persons}
-            clicked = {this.togglePersonsHandler}
+              title = {this.props.appTitle}
+              showPersons = {this.state.showPersons}
+              // persons = {this.state.persons}
+              clicked = {this.togglePersonsHandler}
             /> : null
         }
-        { 
-          // this.state.showPersons == true?   
-          showPersons
-          // : null         
-        }  
-      </WithClass> 
+        { showPersons }
+      </div> 
     );
   }
 }
 
-export default App;
+export default withClass(App, styles.App);

@@ -407,3 +407,62 @@ render(){
     })
   }
 ```
+### Higher Order Components(HOC) - Introduction
+
+```jsx
+import React from 'react';
+
+const WithClass = props => {
+  return <div className = {props.classes}> {props.children} </div>
+}
+export default WithClass;
+
+```
+```jsx
+return (
+  <WithClass classes={styles.App}>
+  <button 
+    onClick = {() => {
+      this.setState({showCockpit: false})
+    }}
+  >
+    Remove Cockpit
+  </button>
+    {
+      this.state.showCockpit == true ?
+        <Cockpit 
+        title = {this.props.appTitle}
+        showPersons = {this.state.showPersons}
+        // persons = {this.state.persons}
+        clicked = {this.togglePersonsHandler}
+        /> : null
+    }
+    { 
+      // this.state.showPersons == true?   
+      showPersons
+      // : null         
+    }  
+  </WithClass> 
+);
+```
+## Example to use the HOC
+```jsx
+// In withClass.js
+import React from 'react';
+// This withClass component is a high order component.
+const withClass = (WrappedComponent, className) => {
+  return props => (
+   <div className = {className}> 
+    <WrappedComponent {...props}/>
+   </div>
+  ) 
+}
+export default withClass;
+```
+```jsx
+// In App.js
+export default withClass(App, styles.App);
+```
+#### Attention points
+- 如果你想用高阶组件的话，传入的component中的props一定要记得解构，不然全都拿不到。。。
+- 凡是return function的情况 return的function里面也要记得return
