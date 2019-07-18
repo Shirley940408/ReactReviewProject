@@ -573,3 +573,40 @@ class Person extends Component {
   }
 }
 ```
+### Ref in function components
+#### React.createRef() will not work in the function components, import `useRef` in the file then initialize  it at the beginning, then call it in hooks (It is because hooks would apply after the JSX loaded, otherwise it will cause error, for the document cannot find the ref at the beginning)
+```jsx
+import React, { useEffect, useRef } from 'react';
+import styles from'./Cockpit.module.scss';
+const Cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+  //toggleBtnRef.current.click(); cannot written here for the document would load the JSX at the end, so it cannot find where is the ref of toggleBthRef 
+  useEffect(() => {
+    // must inside a function
+    console.log('[Cockpit.js] useEfect') 
+    toggleBtnRef.current.click();
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect')
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect')
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect')
+    }
+  })
+  
+  let btnClass = styles.button;
+  if(props.showPersons){
+    btnClass = styles.buttonClicked;
+  }
+  return (
+    <div>
+      <p>{props.title}</p>
+      <button ref = {toggleBtnRef} className={btnClass} onClick = {props.clicked}>Switch Name</button> 
+    </div>
+  );
+}
+export default React.memo(Cockpit); 
+```

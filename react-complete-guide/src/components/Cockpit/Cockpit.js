@@ -1,13 +1,16 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from'./Cockpit.module.scss';
 const Cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+
   useEffect(() => {
     // must inside a function
     console.log('[Cockpit.js] useEfect')
-    // faked http request...
-    setTimeout(() => {
-      alert('Saved data to cloud!')
-    }, 1000)
+    // // faked http request...
+    // setTimeout(() => {
+    //   alert('Saved data to cloud!')
+    // }, 1000)
+    toggleBtnRef.current.click();
     return () => {
       console.log('[Cockpit.js] cleanup work in useEffect')
     }
@@ -27,7 +30,7 @@ const Cockpit = (props) => {
   return (
     <div>
       <p>{props.title}</p>
-      <button className={btnClass} onClick = {props.clicked}>Switch Name</button> 
+      <button ref = {toggleBtnRef} className={btnClass} onClick = {props.clicked}>Switch Name</button> 
     </div>
   );
 }
