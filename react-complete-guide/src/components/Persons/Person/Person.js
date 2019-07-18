@@ -4,13 +4,26 @@ import PropTypes from 'prop-types';
 import styleModule from './Person.module.scss';
 import withClass from '../../../hoc/withClass';
 class Person extends Component {
-  render(){ 
+  constructor(props){
+    super(props)
+    this.inputElementRef = React.createRef()
+  }
+  componentDidMount() {
+    // this.inputElement.focus();
+    this.inputElementRef.current.focus();
+  }
+  render(){
     return (
       <div>
         <p onClick = {this.props.click}>
           I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}
         </p>
-        <input type="text" onChange = {this.props.changed} value = {this.props.name}/>
+        <input 
+        type="text" 
+        ref = {(inputEl) => {this.inputElement = inputEl}}
+        // ref = {this.inputElementRef}
+        onChange = {this.props.changed} 
+        value = {this.props.name}/>
       </div>
     ); 
   }

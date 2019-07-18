@@ -520,3 +520,56 @@ Person.propTypes = {
 
 export default withClass(Person, styleModule.Person);
 ```
+### ref
+
+#### Two ways to use ref
+- #### Method 1: using a callback fuction inside ref, then call this in componentDidMount() lifeCyle
+```jsx
+class Person extends Component {
+
+  componentDidMount() {
+     this.inputElement.focus();
+  }
+  render(){
+    return (
+      <div>
+        <p onClick = {this.props.click}>
+          I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}
+        </p>
+        <input 
+        type="text" 
+        ref = {(inputEl) => {this.inputElement = inputEl}}
+        onChange = {this.props.changed} 
+        value = {this.props.name}/>
+      </div>
+    ); 
+  }
+}
+```
+- #### Method 2: using the `React.createRef()` to get the ref, then call it in the componentDidMount(), *Pay attention when using constructor, always bring `super()` inside*.
+```jsx
+class Person extends Component {
+  constructor(props){
+    super(props)
+    this.inputElementRef = React.createRef()
+  }
+  componentDidMount() {
+    this.inputElementRef.current.focus();
+  }
+  render(){
+    return (
+      <div>
+        <p onClick = {this.props.click}>
+          I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}
+        </p>
+        <input 
+        type="text" 
+        //ref = {(inputEl) => {this.inputElement = inputEl}}
+         ref = {this.inputElementRef}
+        onChange = {this.props.changed} 
+        value = {this.props.name}/>
+      </div>
+    ); 
+  }
+}
+```
