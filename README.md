@@ -610,3 +610,75 @@ const Cockpit = (props) => {
 }
 export default React.memo(Cockpit); 
 ```
+### How to solve the props chains problem -- Using the Context API
+#### This is a good way to solve the problem that A -> B -> C -> D, only D need the info of A, without this context API all the components should transmit the info into themselves.
+```jsx
+// auth-context.js, also the context API
+import React from 'react';
+
+const authContext = React.createContext({
+  authenticated: false,
+  login: () => {},
+});
+// Inside the React.createContext() is an object.
+// The values inside are all default
+
+export default authContext;
+```
+#### All the place that need the to receive the context must be wrapped in <[this API].Provider>
+```jsx
+  <AuthContext.Provider 
+  value = {{
+    authenticated: this.state.authenticated, 
+    login: this.loginHandler}}>
+    /*This is the initialize place*/
+  {
+    this.state.showCockpit === true ?
+      <Cockpit 
+        title = {this.props.appTitle}
+        showPersons = {this.state.showPersons}
+        // persons = {this.state.persons}
+        clicked = {this.togglePersonsHandler}
+        login = {this.loginHandler}
+      /> : null
+  }
+  { showPersons }
+  </AuthContext.Provider>
+```
+#### Then each part that needs the info pickup their needs in <[this API].Consumer>
+```jsx
+// Cockpit.js
+  return (
+    <div>
+      <p>{props.title}</p>
+      <button ref = {toggleBtnRef} className={btnClass} onClick = {props.clicked}>Switch Name</button>
+      <AuthContext.Consumer>
+        {(context) => <button onClick = {context.login}>log in</button>}
+      </AuthContext.Consumer>
+    </div>
+  );
+```
+#### Attention points
+- always using a call-back function to get the info
+- when using API, there is no props.value, always `context.value`
+```jsx
+// Person.js (without any redundancy caused in Persons.js)
+  return (
+      <div>
+        <AuthContext.Consumer>
+        {context =>
+          context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>
+        }
+        </AuthContext.Consumer>
+        <p onClick = {this.props.click}>
+          I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}
+        </p>
+        <input 
+        type="text" 
+        // ref = {(inputEl) => {this.inputElement = inputEl}}
+        ref = {this.inputElementRef}
+        onChange = {this.props.changed} 
+        value = {this.props.name}/>
+      </div>
+  ); 
+```
