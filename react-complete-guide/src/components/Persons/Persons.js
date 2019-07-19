@@ -19,7 +19,8 @@ class Persons extends Component {
   }
   render(){
     console.log('[Persons.js] rendering...');   
-    return this.props.persons.map((val,index) => {   
+    return(
+      this.props.persons.map((val,index) => {   
       return (
         <Person 
         key = {val.id}
@@ -30,6 +31,7 @@ class Persons extends Component {
         /> 
       )    
     })
+    ) 
   }
 }
   export default Persons;

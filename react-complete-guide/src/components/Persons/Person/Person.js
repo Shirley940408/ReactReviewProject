@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styleModule from './Person.module.scss';
 import withClass from '../../../hoc/withClass';
+import AuthContext from '../../../context/auth-context';
 class Person extends Component {
   constructor(props){
     super(props)
@@ -14,17 +15,22 @@ class Person extends Component {
   }
   render(){
     return (
-      <div>
-        <p onClick = {this.props.click}>
-          I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}
-        </p>
-        <input 
-        type="text" 
-        // ref = {(inputEl) => {this.inputElement = inputEl}}
-        ref = {this.inputElementRef}
-        onChange = {this.props.changed} 
-        value = {this.props.name}/>
-      </div>
+        <div>
+          <AuthContext.Consumer>
+          {context =>
+            context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>
+          }
+          </AuthContext.Consumer>
+          <p onClick = {this.props.click}>
+            I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}
+          </p>
+          <input 
+          type="text" 
+          // ref = {(inputEl) => {this.inputElement = inputEl}}
+          ref = {this.inputElementRef}
+          onChange = {this.props.changed} 
+          value = {this.props.name}/>
+        </div>
     ); 
   }
 }

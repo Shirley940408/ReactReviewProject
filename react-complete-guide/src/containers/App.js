@@ -5,6 +5,7 @@ import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
+import AuthContext from '../context/auth-context';
 class App extends Component {
   constructor(props){
     super(props);
@@ -19,6 +20,7 @@ class App extends Component {
     showPersons: false,
     showCockpit: true,
     changeCounter: 0,
+    authenticated: false,
   }
   // static getDerivedStateFromProps(props, state){
   //   console.log('[App.js] getDrivedStateFromProps', props);
@@ -53,7 +55,9 @@ class App extends Component {
     this.setState({showPersons: !showPersons})
     // console.log(this.state.showPersons);
   }
-      
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  } 
   deletePerson = (personIndex) => {
     const persons = this.state.persons;
     // copy value of original this.state.persons object to avoid directly change in the state object
@@ -84,6 +88,7 @@ class App extends Component {
           persons = {this.state.persons}
           clicked = {this.deletePerson}
           changed = {this.nameChangedHandler}
+          // isAuthenticated = {this.state.authenticated}
         />
       );
       // style[':hover'] = {
@@ -100,6 +105,10 @@ class App extends Component {
         >
         Remove Cockpit
         </button>
+        <AuthContext.Provider 
+        value = {{
+          authenticated: this.state.authenticated, 
+          login: this.loginHandler}}>
         {
           this.state.showCockpit === true ?
             <Cockpit 
@@ -107,9 +116,11 @@ class App extends Component {
               showPersons = {this.state.showPersons}
               // persons = {this.state.persons}
               clicked = {this.togglePersonsHandler}
+              login = {this.loginHandler}
             /> : null
         }
         { showPersons }
+        </AuthContext.Provider>
       </div> 
     );
   }
