@@ -62,7 +62,7 @@ wrap all element in a single element
 class App extends Component {
   render() {
     return (
-      <div className="App"> //one <></> wraped.
+      <div className="App"> //one <Element></Element> wraped.
       <p> Hi, I'm a react app </p>
       </div>   
     );
