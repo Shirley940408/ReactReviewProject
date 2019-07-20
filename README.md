@@ -682,3 +682,92 @@ export default authContext;
       </div>
   ); 
 ```
+### How to use context API with a decent way
+#### It is too long to write <AuthContext.Consumer></AuthContext.Consumer> in all the components those who need the context info, here is a more decent way to avoid this.
+- #### in class-based components:
+```jsx
+class Person extends Component {
+  constructor(props){
+    super(props)
+    this.inputElementRef = React.createRef()
+  }
+  static contextType = AuthContext;
+
+  componentDidMount() {
+    // this.inputElement.focus();
+    this.inputElementRef.current.focus();
+    console.log(this.context.authenticated);
+  }
+  render(){
+    return (
+        <div>      
+          {
+            this.context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>
+          }      
+          <p onClick = {this.props.click}>
+            I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}
+          </p>
+          <input 
+          type="text" 
+          // ref = {(inputEl) => {this.inputElement = inputEl}}
+          ref = {this.inputElementRef}
+          onChange = {this.props.changed} 
+          value = {this.props.name}/>
+        </div>
+    ); 
+  }
+}
+```
+#### Attention points:
+- ##### initialize the static contextType to add context as an attribution in this object: `static contextType = AuthContext;`
+- ##### Then using it with the form this.context.[your keyname] in JSX area: `{this.context.authenticated ?<p>Authenticated!</p>:<p>Please log in</p>}`
+
+- #### function-based component
+##### function-based component cannot create 'this', so it need another way to solve this. This method is only available after React 16.6
+```jsx
+import React, { useEffect, useRef, useContext } from 'react';
+import styles from'./Cockpit.module.scss';
+import AuthContext from '../../context/auth-context';
+const Cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
+
+  console.log(authContext.authenticated);
+  useEffect(() => {
+    // must inside a function
+    console.log('[Cockpit.js] useEfect')
+    // // faked http request...
+    // setTimeout(() => {
+    //   alert('Saved data to cloud!')
+    // }, 1000)
+    toggleBtnRef.current.click();
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect')
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect')
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect')
+    }
+  })
+  
+  let btnClass = styles.button;
+  if(props.showPersons){
+    btnClass = styles.buttonClicked;
+  }
+  return (
+    <div>
+      <p>{props.title}</p>
+      <button ref = {toggleBtnRef} className={btnClass} onClick = {props.clicked}>Switch Name</button>
+      <button onClick = {authContext.login}>log in</button>
+    </div>
+  );
+}
+export default React.memo(Cockpit); 
+```
+#### Attention points
+- ##### import useContext `import React, { useEffect, useRef, useContext } from 'react';`
+- ##### create a parameter to access the context uing useContext(): `const authContext = useContext(AuthContext);`
+- ##### Then you can receive the context info by calling [your parameter].key: `<button  onClick  =  {authContext.login}>log in</button>`
